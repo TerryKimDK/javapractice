@@ -1,0 +1,6 @@
+package application;
+
+public class BankAccount {
+	int balance;
+	Client owner;
+}
