@@ -1,0 +1,16 @@
+package app;
+
+import javax.swing.JFrame;
+
+public class Ex5 extends JFrame {
+	public Ex5() {
+		super("GUI");
+		setSize(300, 300);
+		setVisible(true);
+		
+	}
+	
+	public static void main(String[] args) {
+		new Ex5();
+	}
+}

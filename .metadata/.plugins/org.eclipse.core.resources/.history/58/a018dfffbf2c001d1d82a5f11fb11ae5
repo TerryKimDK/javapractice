@@ -1,0 +1,13 @@
+package app;
+
+public abstract class Shape {
+
+	public static void main(String[] args) {
+		protected int x, y;
+		public abstract double area();
+		public abstract double circumference();
+		
+
+	}
+
+}

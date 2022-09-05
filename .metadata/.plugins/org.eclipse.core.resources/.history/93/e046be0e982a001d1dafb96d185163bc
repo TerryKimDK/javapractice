@@ -1,0 +1,15 @@
+package app;
+
+import java.awt.Frame;
+
+public class Ex6 extends Frame{
+	// 필드
+	public Ex6() {
+		// 생성자
+	}
+	
+	public static void main(String[] args) {
+		
+	}
+
+}

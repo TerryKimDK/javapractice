@@ -1,0 +1,23 @@
+package app;
+
+import javax.swing.JFrame;
+import javax.swing.JTextField;
+
+public class Ex5 extends JFrame {
+	public JTextField id, pw;
+	public Ex5() {
+		super("GUI");
+		id = new JTextField("id");
+		pw = new JTextField("pw");
+		Jpanel p = new JPanel();
+		this.add(id);
+		this.add(pw);
+		setSize(300, 300);
+		setVisible(true);
+		
+	}
+	
+	public static void main(String[] args) {
+		new Ex5();
+	}
+}

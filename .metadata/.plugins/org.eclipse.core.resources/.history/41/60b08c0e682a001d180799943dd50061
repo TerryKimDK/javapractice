@@ -1,0 +1,14 @@
+package app;
+
+public interface Bank {
+	
+	private String userName;
+	
+	private int bankId;
+	
+	private int bankAccount;
+	
+	private 
+	
+	
+}
