@@ -1,0 +1,59 @@
+package app;
+
+import java.awt.Dimension;
+import java.awt.Frame;
+import java.awt.Graphics;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.Random;
+
+public class Ex14 extends Frame implements Runnable{
+	int x = 0;
+	int y = 20;
+	
+	boolean xOrient, yOrient;
+	public Ex14() {
+		setSize(300, 200);
+		setVisible(true);
+		addWindowFocusListener(new WindowAdapter() {
+			public void WindowClosing(WindowEvent e) {
+				System.exit(0);
+			}
+		});		
+	}
+	public void paint(Graphics gr) {
+		Random ran = new Random();
+		Dimension d = this.getSize();
+		if (xOrient) {
+			x--;
+			if (x < 0) {
+				x = 0;
+				xOrient = false;
+			}
+		} else {
+			x++; 
+			if (x>=d.width-20) {
+				x = d.width -20;
+				xOrient = true;
+			}
+		}
+		if (yOrient) {
+			y--;
+			if (y <0) {
+				y=0;
+				yOrient = false;
+			}
+		}else {
+			y++;
+			if(y>=d.height) {
+				y= d.height - 20;
+				yOrient = true;
+			}
+		}
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

@@ -1,0 +1,11 @@
+package app;
+
+import java.awt.Toolkit;
+
+public class Ex13 extends Thread {
+
+	public void run() {
+		System.out.println("호출됌");
+	}
+
+}

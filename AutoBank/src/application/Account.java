@@ -1,39 +1,36 @@
 package application;
 
 public class Account {
-	private String ano;
-	private String owner;
-	private int balance;
-
-	public Account(String ano, String owner, int balance) {
-		super();
-		this.ano = ano;
-		this.owner = owner;
-		this.balance = balance;
-	}
-
-	public String getAno() {
-		return ano;
-	}
-
-	public void setAno(String ano) {
-		this.ano = ano;
-	}
-
-	public String getOwner() {
-		return owner;
-	}
-
-	public void setOwner(String owner) {
-		this.owner = owner;
-	}
-
-	public int getBalance() {
-		return balance;
-	}
-
-	public void setBalance(int balance) {
-		this.balance = balance;
-	}
+	// 생성자 만들기 source -> generate construct using field
+		public Account(String name, String id, String pw) {
+			super();
+			//super 가 있는이유 extends object 가 숨겨져 있기 때문에 , object는 모든 class의 최상위 클래스다
+			this.name = name;
+			this.id = id;
+			this.pw = pw;
+		}
+		
+		private String name;
+		private String id;
+		private String pw;
+		
+		public String getName() {
+			return name;
+		}
+		public void setName(String name) {
+			this.name = name;
+		}	
+		public String getId() {
+			return id;
+		}
+		public void setId(String id) {
+			this.id = id;
+		}
+		public String getPw() {
+			return pw;
+		}
+		public void setPw(String pw) {
+			this.pw = pw;
+		}
 
 }

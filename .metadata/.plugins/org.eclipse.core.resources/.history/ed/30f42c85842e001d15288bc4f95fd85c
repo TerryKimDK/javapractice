@@ -1,0 +1,10 @@
+package application;
+
+public class AccountApp {
+	
+	private static Account[] accountArr = new Account[100];
+
+	public static void main(String[] args) {
+		AccountApp app = new AccountApp();
+	}
+}
