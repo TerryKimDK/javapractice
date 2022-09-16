@@ -1,15 +1,14 @@
 package app;
 
-import java.io.FileReader;
-import java.net.URLDecoder;
-import java.util.*;
-
+	import java.io.FileReader;
+	import java.net.URLDecoder;
+	import java.util.*;
+// 로그인 기능
 public class Ex9 {
 	public static void main(String[] args) {
 		// Map<String, String> map = new HashMap<>();
 		Map<String, String> map = new Hashtable<>();
 		Properties properties = getAdminInfo();
-
 		getAdminInfo();
 		// Map<객체, 객체> -> int(X), Integer(O)
 		String adminId = properties.getProperty("username");
@@ -22,6 +21,7 @@ public class Ex9 {
 			String id = sc.next();
 			System.out.print("PW : ");
 			String pw = sc.next();
+			
 			if (map.containsKey(id)) {
 				if (map.get(id).equals(pw)) {
 					System.out.println("로그인 되었습니다.");

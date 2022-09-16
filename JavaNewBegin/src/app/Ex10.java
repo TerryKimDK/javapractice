@@ -15,16 +15,19 @@ public class Ex10 extends JFrame{
 		map = new HashMap<>();
 		memberInfo();
 		list = new List();
+
 		Iterator<Integer> keys = map.keySet().iterator();
 		while(keys.hasNext()) {
 			Integer key = keys.next();
-			Ex2 member = map.get(key);
+			Ex2 member = (Ex2)map.get(key);
+			System.out.println(key + " : " + member.getName());
+
+
 			list.add(member.getName());
 		}
-
 		add(list);
 		setSize(300, 300);
-//		setVisible(true);
+		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	public void memberInfo() {

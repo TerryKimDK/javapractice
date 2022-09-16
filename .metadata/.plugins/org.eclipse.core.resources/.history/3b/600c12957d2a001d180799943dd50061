@@ -1,8 +1,0 @@
-package app;
-
-
-public class Ex5 extends JFrame{
-	public static void main(String[] args) {
-		
-	}
-}

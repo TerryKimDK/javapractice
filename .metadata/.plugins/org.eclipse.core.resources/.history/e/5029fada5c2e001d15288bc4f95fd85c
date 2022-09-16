@@ -1,9 +1,0 @@
-package app;
-
-public class Ex13 extends Thread {
-
-	public void run() {
-		
-	}
-
-}
