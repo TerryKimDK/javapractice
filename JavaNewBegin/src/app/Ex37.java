@@ -14,7 +14,7 @@ public class Ex37 {
 		Statement stmt = null;
 		ResultSet rs = null;
 		try {
-			pstmt = conn.prepareStatement(Ex38.insert());
+			pstmt = conn.prepareStatement(insert());
 			int result = pstmt.executeUpdate(); // -1 , 0 , 1 data manufulation insert, update, delete / create drop 0
 			//System.out.println(result); // 0
 			String msg = result > -1 ? "성공" : "실패";
@@ -37,8 +37,7 @@ public class Ex37 {
 
 	}
 	public static String insert() {
-		String sql = "insert into test6(id, pw, mdate, age) values"
-				+ "values('abc,'123','2021-09-08, 100)";
+		String sql = "insert into dbtest(id, pw, mdate, age) values (12345, 12345)";
 		return sql;
 	}
 	

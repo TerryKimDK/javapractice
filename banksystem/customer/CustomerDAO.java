@@ -1,0 +1,147 @@
+package customer;
+
+import dBUtil.DBUtil;
+import main.Main;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class CustomerDAO {
+    Main main = new Main();
+    // 1. 고객 생성
+    public void insert(CustomerDTO dto) { // [3] 입력된 클래스의 정보를
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtil.getInstance().getConnection();
+            String sql = "insert into customer values (?,?,?,?,?,?)";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1,dto.getCustomerNumber());
+            pstmt.setString(2, dto.getCustomerName());
+            pstmt.setString(3, dto.getCustomerPhone());
+            pstmt.setString(4, dto.getCustomerAddress());
+            pstmt.setString(5, dto.getCustomerRRN());
+            pstmt.setString(6, dto.getCustomerGender());
+            int result = pstmt.executeUpdate();
+            String msg = result > -1 ? "성공" : "실패";
+            System.out.println();
+            System.out.println(msg);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null)
+                    rs.close();
+                if (pstmt != null)
+                    pstmt.close();
+                if (conn != null)
+                    conn.close();
+                main.reMain(); //다시 돌아오게하는 메소드
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    // 2. 고객 전체 보기
+    public List<CustomerDTO> getCustomerList() {
+
+        List<CustomerDTO> customerList = new ArrayList<CustomerDTO>();
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DBUtil.getInstance().getConnection();
+
+            String sql = "select customerNumber,customerName,customerPhone,customerAddress,customerRRN,customerGender from customer"; // *로 하기보다는 그냥 나열
+            pstmt = conn.prepareStatement(sql);
+            rs = pstmt.executeQuery();
+            // 결과값 얻어오기 없는데이터를 검색했을때 에러나니까 조건문 사용
+            while (rs.next()) {
+                CustomerDTO customerDTO = new CustomerDTO(); // 한 행씩 정보를 저장해서 리스트에 객체를 넣어야 하니까 매 반복문 마다 DeptDTO객체를 만들어야함
+                customerDTO.setCustomerNumber(rs.getInt(1)); // 뒤에 숫자는 컬럼순 (컬럼명 직접 지정해줘도 됨 "")
+                customerDTO.setCustomerName(rs.getString(2));
+                customerDTO.setCustomerPhone(rs.getString(3));
+                customerDTO.setCustomerAddress(rs.getString(4));
+                customerDTO.setCustomerRRN(rs.getString(5));
+                customerDTO.setCustomerGender(rs.getString(6));
+
+                customerList.add(customerDTO);
+            }
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(conn, pstmt, rs);
+        }
+        return customerList;
+    }
+
+    // 3. 고객 검색 하기
+    public CustomerDTO getcustomer(int customerNumber) {
+        CustomerDTO customerDTO = null;
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DBUtil.getInstance().getConnection();
+            String sql = "select customerNumber,customerName,customerPhone,customerAddress,customerRRN,customerGender from customer where customerNumber = ?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, customerNumber);
+            rs = pstmt.executeQuery();
+            //결과값 얻어오기 없는데이터를 검색했을때 에러나니까 조건문 사용
+            if (rs.next()) {
+                customerDTO = new CustomerDTO();
+                customerDTO.setCustomerNumber(rs.getInt(1)); // 뒤에 숫자는 컬럼순 (컬럼명 직접 지정해줘도 됨 "")
+                customerDTO.setCustomerName(rs.getString(2));
+                customerDTO.setCustomerPhone(rs.getString(3));
+                customerDTO.setCustomerAddress(rs.getString(4));
+                customerDTO.setCustomerRRN(rs.getString(5));
+                customerDTO.setCustomerGender(rs.getString(6));
+            }
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null)
+                    rs.close();
+                if (pstmt != null)
+                    pstmt.close();
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return customerDTO;
+    }
+
+    // 4. 고객 삭제
+    public void deleteCustomer(CustomerDTO dto) {
+        String sql = "delete from customer where customerNumber = ?";
+        try (Connection conn = DBUtil.getInstance().getConnection(); PreparedStatement ps = conn.prepareStatement(sql);) {
+            ps.setInt(1, dto.getCustomerNumber());
+            int count = ps.executeUpdate();
+            if (count > 0) {
+                System.out.println(count + "입력됨");
+            } else {
+                System.out.println("입력 실패");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e1) {
+            e1.printStackTrace();
+        }
+    }
+}
