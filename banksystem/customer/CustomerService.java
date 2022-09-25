@@ -28,12 +28,12 @@ public class CustomerService {
                 String customerName = scan.next();
 
                 System.out.print("customerPhone : ");
-                String customerPhone = scan.next();
+                Long customerPhone = scan.nextLong();
 
                 System.out.print("customerAddress : ");
                 String customerAddress = scan.next();
 
-                System.out.print("customerRRN : ");
+                System.out.print("customerRRN (생일): ");
                 String customerRRN = scan.next();
 
                 System.out.print("customerGender : ");
@@ -48,20 +48,22 @@ public class CustomerService {
                 System.out.print(dto);
                 dao.insert(dto);
 
+                //계좌번호 출력 프로그램 만들기
+
             } else if (num == 2) {
                 List<CustomerDTO> dtoList = dao.getCustomerList();
                 for (CustomerDTO i : dtoList) {
                     System.out.println(i);
                 }
             } else if (num == 3) {
-                System.out.print("고객 번호 : ");
+                System.out.print("고객 연락처 : ");
                 int customerNumber = scan.nextInt();
                 dto = dao.getcustomer(customerNumber);
                 System.out.println(dto);
             } else if (num == 4) {
-                System.out.print("고객 번호(삭제): ");
-                int customerNumber = scan.nextInt();
-                dto.setCustomerNumber(customerNumber);
+                System.out.print("고객 연락처(삭제): ");
+                Long customerPhone = scan.nextLong();
+                dto.setCustomerPhone(customerPhone);
                 dao.deleteCustomer(dto);
             } else if (num == 5) {
                 break;

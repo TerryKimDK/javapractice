@@ -23,13 +23,13 @@ public class AccountService {
             int num = sc.nextInt();
             if (num == 1) {
                 System.out.println("추가");
-                System.out.print("accountNumber : ");
+                System.out.print("accountId : ");
                 String accountNumber = sc.next();
 
-                System.out.print("customerNumber : ");
+                System.out.print("핸드폰 번호를 입력해주세요(계좌번호) : ");
                 int customerNumber = sc.nextInt();
 
-                System.out.print("accountPW : ");
+                System.out.print("accountPW 숫자로 입력해주세요: ");
                 int accountPW = sc.nextInt();
 
                 System.out.println("얼마를 넣으시겠습니까? : ");

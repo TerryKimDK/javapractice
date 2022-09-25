@@ -1,30 +1,21 @@
 package customer;
 
 public class CustomerDTO {
-    private int customerNumber;
     private String customerName;
-    private String customerPhone;
+    private long customerPhone;
     private String customerAddress;
     private String customerRRN;
     private String customerGender;
-
-    public int getCustomerNumber() {
-        return customerNumber;
-    }
-    public void setCustomerNumber(int customerNumber) {
-        this.customerNumber = customerNumber;
-    }
-
     public String getCustomerName() {
         return customerName;
     }
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
     }
-    public String getCustomerPhone() {
+    public Long getCustomerPhone() {
         return customerPhone;
     }
-    public void setCustomerPhone(String customerPhone) {
+    public void setCustomerPhone(Long customerPhone) {
         this.customerPhone = customerPhone;
     }
     public String getCustomerAddress() {
@@ -48,8 +39,12 @@ public class CustomerDTO {
 
     @Override
     public String toString() {
-        return "customerDTO [customerNumber=" + customerNumber + ", customerName=" + customerName + ", customerPhone="
-                + customerPhone + ", customerAddress=" + customerAddress + ", customerRRN=" + customerRRN
-                + ", customerGender=" + customerGender + "]";
+        return "CustomerDTO{" +
+                "customerName='" + customerName + '\'' +
+                ", customerPhone='" + customerPhone + '\'' +
+                ", customerAddress='" + customerAddress + '\'' +
+                ", customerRRN='" + customerRRN + '\'' +
+                ", customerGender='" + customerGender + '\'' +
+                '}';
     }
 }

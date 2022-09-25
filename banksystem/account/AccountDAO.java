@@ -9,11 +9,13 @@ public class AccountDAO {
     PreparedStatement pstmt = null;
     Statement stmt = null;
     ResultSet rs = null;
+
     // 1. 입출금 통장 개설
     public void insert(AccountDTO dto) { // [3] 입력된 클래스의 정보를
         // sql = value(accountNumber,customerNumber,accountPW,balance)
         String sql = "insert into account values (?,?,?,?)";
-        try (Connection conn = DBUtil.getInstance().getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql);) {
+        try (Connection conn = DBUtil.getInstance().getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);) {
             // [4] 사용해서 쿼리문을 dto클래스 내부의 get메서드를 사용해서 private 변수들의 값들을 가져와서
             pstmt.setString(1, dto.getAccountNumber());
             pstmt.setInt(2, dto.getCustomerNumber());
@@ -49,7 +51,7 @@ public class AccountDAO {
 
             rs = pstmt.executeQuery();
             //결과값 얻어오기 없는데이터를 검색했을때 에러나니까 조건문 사용
-            if(rs.next()) {
+            if (rs.next()) {
                 accountDTO = new AccountDTO();
                 accountDTO.setAccountNumber(rs.getString(1)); // 뒤에 숫자는 컬럼순 (컬럼명 직접 지정해줘도 됨 "")
                 accountDTO.setCustomerNumber(rs.getInt(2));
@@ -59,7 +61,7 @@ public class AccountDAO {
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        }finally {
+        } finally {
             DBUtil.close(conn, pstmt, rs);
         }
         return accountDTO;

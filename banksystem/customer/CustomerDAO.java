@@ -19,14 +19,13 @@ public class CustomerDAO {
         ResultSet rs = null;
         try {
             conn = DBUtil.getInstance().getConnection();
-            String sql = "insert into customer values (?,?,?,?,?,?)";
+            String sql = "insert into customer values (?,?,?,?,?)";
             pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1,dto.getCustomerNumber());
-            pstmt.setString(2, dto.getCustomerName());
-            pstmt.setString(3, dto.getCustomerPhone());
-            pstmt.setString(4, dto.getCustomerAddress());
-            pstmt.setString(5, dto.getCustomerRRN());
-            pstmt.setString(6, dto.getCustomerGender());
+            pstmt.setString(1, dto.getCustomerName());
+            pstmt.setLong(2, dto.getCustomerPhone());
+            pstmt.setString(3, dto.getCustomerAddress());
+            pstmt.setString(4, dto.getCustomerRRN());
+            pstmt.setString(5, dto.getCustomerGender());
             int result = pstmt.executeUpdate();
             String msg = result > -1 ? "성공" : "실패";
             System.out.println();
@@ -61,18 +60,17 @@ public class CustomerDAO {
         try {
             conn = DBUtil.getInstance().getConnection();
 
-            String sql = "select customerNumber,customerName,customerPhone,customerAddress,customerRRN,customerGender from customer"; // *로 하기보다는 그냥 나열
+            String sql = "select customerName,customerPhone,customerAddress,customerRRN,customerGender from customer"; // *로 하기보다는 그냥 나열
             pstmt = conn.prepareStatement(sql);
             rs = pstmt.executeQuery();
             // 결과값 얻어오기 없는데이터를 검색했을때 에러나니까 조건문 사용
             while (rs.next()) {
                 CustomerDTO customerDTO = new CustomerDTO(); // 한 행씩 정보를 저장해서 리스트에 객체를 넣어야 하니까 매 반복문 마다 DeptDTO객체를 만들어야함
-                customerDTO.setCustomerNumber(rs.getInt(1)); // 뒤에 숫자는 컬럼순 (컬럼명 직접 지정해줘도 됨 "")
-                customerDTO.setCustomerName(rs.getString(2));
-                customerDTO.setCustomerPhone(rs.getString(3));
-                customerDTO.setCustomerAddress(rs.getString(4));
-                customerDTO.setCustomerRRN(rs.getString(5));
-                customerDTO.setCustomerGender(rs.getString(6));
+                customerDTO.setCustomerName(rs.getString(1));
+                customerDTO.setCustomerPhone(rs.getLong(2));
+                customerDTO.setCustomerAddress(rs.getString(3));
+                customerDTO.setCustomerRRN(rs.getString(4));
+                customerDTO.setCustomerGender(rs.getString(5));
 
                 customerList.add(customerDTO);
             }
@@ -101,12 +99,11 @@ public class CustomerDAO {
             //결과값 얻어오기 없는데이터를 검색했을때 에러나니까 조건문 사용
             if (rs.next()) {
                 customerDTO = new CustomerDTO();
-                customerDTO.setCustomerNumber(rs.getInt(1)); // 뒤에 숫자는 컬럼순 (컬럼명 직접 지정해줘도 됨 "")
-                customerDTO.setCustomerName(rs.getString(2));
-                customerDTO.setCustomerPhone(rs.getString(3));
-                customerDTO.setCustomerAddress(rs.getString(4));
-                customerDTO.setCustomerRRN(rs.getString(5));
-                customerDTO.setCustomerGender(rs.getString(6));
+                customerDTO.setCustomerName(rs.getString(1));
+                customerDTO.setCustomerPhone(rs.getLong(2));
+                customerDTO.setCustomerAddress(rs.getString(3));
+                customerDTO.setCustomerRRN(rs.getString(4));
+                customerDTO.setCustomerGender(rs.getString(5));
             }
         } catch (Exception e) {
             // TODO Auto-generated catch block
@@ -129,9 +126,9 @@ public class CustomerDAO {
 
     // 4. 고객 삭제
     public void deleteCustomer(CustomerDTO dto) {
-        String sql = "delete from customer where customerNumber = ?";
+        String sql = "delete from customer where customerPhone = ?";
         try (Connection conn = DBUtil.getInstance().getConnection(); PreparedStatement ps = conn.prepareStatement(sql);) {
-            ps.setInt(1, dto.getCustomerNumber());
+            ps.setLong(1, dto.getCustomerPhone());
             int count = ps.executeUpdate();
             if (count > 0) {
                 System.out.println(count + "입력됨");
