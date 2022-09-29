@@ -34,9 +34,9 @@ public class EchoClient {
          EchoClient ec;
          System.out.println("메시지를 입력하세요");
          if(args.length > 0) {
-            ec = new EchoClient(args[0], 1);
+            ec = new EchoClient(args[0], 7979);
          }else {
-            ec = new EchoClient("172.30.1.57", 1);
+            ec = new EchoClient("localhost", 7979);
          }
          ec.echo();
          ec.close();
